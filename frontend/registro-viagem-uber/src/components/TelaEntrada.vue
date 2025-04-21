@@ -1,28 +1,37 @@
 <script setup>
-// defineProps({
-//   msg: String,
-// })
+defineProps({
+  ganhoValor: Number,
+  kmRodado: Number,
+  horasTrabalhadas: Number,
+  qtdeViagem: Number,
+ })
 import {computed, ref} from 'vue'
 
   const ganhoValor = ref(0)
   const kmRodado = ref(0)
+  const horasTrabalhadas = ref(0)
+  const qtdeViagem = ref(0)
 
-  const calculo =  computed(()=>{
 
-   const soma = ganhoValor.value / kmRodado.value
+  const calculoKm =  computed(()=>{
 
-  return soma
-})
+  return  ganhoValor.value / kmRodado.value
+
+  })
+
+  const ganhoPorHora = computed(()=>{
+    return ganhoValor.value / horasTrabalhadas.value
+  })
 
 </script>
 
 <template>
   <div class="container">
 
-    <h1>Calculadora de custo </h1>
-    <h2>Motoristas de Aplicativo </h2>
+
 
     <form>
+      <h3>Entrada</h3>
 
     <div class="card">
       <label>Data do Lançamento</label>
@@ -42,19 +51,17 @@ import {computed, ref} from 'vue'
 
     <div class="card">
       <label>Horas Trabalhadas</label>
-      <input type="number" placeholder="Informe as horas trabalhadas ">
+      <input type="number"  v-model="horasTrabalhadas" placeholder="Informe as horas trabalhadas ">
     </div>
+
+      <div class="card">
+        <label>Quantidade de Viagens</label>
+        <input type="number"  v-model="qtdeViagem" placeholder="Informe quantas viagem foram feitas">
+      </div>
 
   </form>
 
-  <div>
-    <p>Ganho digitado: {{ ganhoValor }}</p>
-    <p>KM digitado: {{ kmRodado }}</p>
-  </div>
-
 </div>
-
-  {{"R$ " + calculo.toFixed(2)}}
 
 </template>
 
@@ -74,9 +81,17 @@ import {computed, ref} from 'vue'
 }
 
 .card{
+  padding: 10px;
+  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 5px;
+}
+input{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid green;
 }
 
 </style>
