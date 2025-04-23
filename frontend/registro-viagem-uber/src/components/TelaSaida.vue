@@ -10,8 +10,6 @@ const valorSaida = ref(0);
 <template>
 
   <div class="container">
-
-
     <form>
       <h3>Saida</h3>
 
@@ -32,14 +30,15 @@ const valorSaida = ref(0);
 
 
       <div class="card">
-        <label for="fruta">Tipo de Gasto</label>
-        <select v-model="tipoGasto" id="fruta">
-          <option  selected>Selecione o Tipo de Gasto  </option>
-          <option  :value="alimentação">Alimentação  </option>
-          <option  :value="etanol">combustivel Etanol  </option>
-          <option :value="gasolina">combustivel Gasolina  </option>
+        <label for="tipoGasto">Tipo de Gasto</label>
+        <select v-model="tipoGasto" id="tipoGasto">
+          <option  :value="alimentação" selected>Alimentação  </option>
+          <option  :value="etanol">Combustivel Etanol  </option>
+          <option :value="gasolina">Combustivel Gasolina  </option>
         </select>
       </div>
+
+      <input type="submit" @click="cadastrarSaida" value="Cadastrar">
 
     </form>
 

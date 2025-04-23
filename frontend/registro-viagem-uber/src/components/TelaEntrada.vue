@@ -27,9 +27,6 @@ import {computed, ref} from 'vue'
 
 <template>
   <div class="container">
-
-
-
     <form>
       <h3>Entrada</h3>
 
@@ -58,6 +55,8 @@ import {computed, ref} from 'vue'
         <label>Quantidade de Viagens</label>
         <input type="number"  v-model="qtdeViagem" placeholder="Informe quantas viagem foram feitas">
       </div>
+
+      <input @click="cadastrarEntrada" type="submit" value="Cadastrar">
 
   </form>
 
@@ -88,7 +87,7 @@ import {computed, ref} from 'vue'
   gap: 10px;
   border-radius: 5px;
 }
-input{
+input, select{
   padding: 10px;
   border-radius: 5px;
   border: 1px solid green;
