@@ -42,9 +42,6 @@ const componenteAtual = computed(() => {
   </div>
 
 
-
-
-
 </template>
 
 <style scoped>

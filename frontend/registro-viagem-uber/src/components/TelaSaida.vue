@@ -5,6 +5,7 @@ const descGasto = ref('');
 const valorSaida = ref(0);
 
 
+
 </script>
 
 <template>
@@ -38,7 +39,7 @@ const valorSaida = ref(0);
         </select>
       </div>
 
-      <input type="submit" @click="cadastrarSaida" value="Cadastrar">
+      <input type="submit" @click.prevent="cadastrarSaida" value="Cadastrar">
 
     </form>
 
