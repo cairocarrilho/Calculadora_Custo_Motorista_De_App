@@ -1,8 +1,31 @@
 <script setup >
 import TelaEntrada from './components/TelaEntrada.vue'
 import TelaSaida from "./components/TelaSaida.vue";
+import Calculos from "./components/Calculos.vue";
 
-import { ref, computed } from 'vue'
+import { ref, computed,provide  } from 'vue'
+
+const ganhoValor = ref(0);
+const kmRodado = ref(0);
+const horasTrabalhadas = ref(0);
+const qtdeViagem = ref(0);
+const resultadosEntrada = ref(false);
+
+const valorSaida = ref(0);
+
+// Disponibiliza os dados para os filhos
+provide('dadosEntrada', {
+  ganhoValor,
+  kmRodado,
+  horasTrabalhadas,
+  qtdeViagem,
+  resultadosEntrada
+})
+
+provide('dadosSaida', {
+  valorSaida,
+})
+
 
 // Estado de qual tipo está selecionado
 const tipoSelecionado = ref('entrada')
@@ -40,7 +63,7 @@ const componenteAtual = computed(() => {
     <!-- Renderiza o componente de acordo com a seleção,  -->
     <component :is="componenteAtual" />
   </div>
-
+  <Calculos v-if="tipoSelecionado === 'entrada'"/>
 
 </template>
 

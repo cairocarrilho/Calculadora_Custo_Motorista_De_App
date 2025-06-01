@@ -1,43 +1,32 @@
 <script setup>
 
-import {computed, ref} from 'vue'
-
-  const ganhoValor = ref(0);
-  const kmRodado = ref(0);
-  const horasTrabalhadas = ref(0);
-  const qtdeViagem = ref(0);
-  const resultados = ref(false);
+import { inject } from 'vue'
 
 
+const {
+  ganhoValor,
+  kmRodado,
+  horasTrabalhadas,
+  qtdeViagem,
+  resultadosEntrada
+} = inject('dadosEntrada') // injeto eles do elementos pai para ser usado
 
-
-  const calculoKm =  computed(()=>{
-      return (ganhoValor.value / kmRodado.value).toFixed(2)
-  })
-
-  const ganhoPorHora = computed(()=>{
-    return (ganhoValor.value / horasTrabalhadas.value).toFixed(2)
-  })
-
-const ganhoPorCorrida = computed(()=>{
-  return ganhoValor.value == 0 ? 0 : (ganhoValor.value / qtdeViagem.value).toFixed(2)
-})
 
 const cadastrarEntrada =()=>{
 
-     if(ganhoValor.value !== 0 && kmRodado.value !== 0 && horasTrabalhadas.value !== 0 && qtdeViagem.value!== 0) {
-       resultados.value = true;
-
-
-     }
+  if(ganhoValor.value !== 0 && kmRodado.value !== 0 && horasTrabalhadas.value !== 0 && qtdeViagem.value!== 0) {
+    resultadosEntrada.value = true;
+  }
 
 }
+
+
 
 </script>
 
 <template>
   <div class="container">
-    <form>
+    <form @submit.prevent="cadastrarEntrada">
       <h3>Entrada</h3>
 
     <div class="card">
@@ -66,20 +55,12 @@ const cadastrarEntrada =()=>{
         <input type="number"  v-model="qtdeViagem" placeholder="Informe quantas viagem foram feitas">
       </div>
 
-      <input @click.prevent="cadastrarEntrada" type="submit" value="Cadastrar">
+      <input type="submit" value="Cadastrar" />
 
-  </form>
+
+    </form>
 
 </div>
-  <!-- Mostra a lista SOMENTE se houver entradas -->
-
-  <h3>Resultado:</h3>
-  <div v-if="resultados" class="card_resultado">
-
-    <div class="result">Ganho por KM: R$ {{ calculoKm }}</div>
-    <div class="result">Ganho por KM: R$ {{ ganhoPorCorrida }}</div>
-    <div class="result">Ganho por Hora: R$ {{ ganhoPorHora }}</div>
-  </div>
 
 </template>
 
@@ -111,19 +92,22 @@ input, select{
   border-radius: 5px;
   border: 1px solid green;
 }
-.card_resultado{
-  display: flex;
-  gap: 10px;
 
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
- .result{
-   padding: 10px 10px;
-   width: 100px;
-   height: 100px;
-   border: 1px solid red;
-   border-radius: 5px;
-   text-align: center;
-   margin: auto;
- }
+form input[type='submit']{
+  width: 100%;
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  gap:10px;
+}
+
 
 </style>

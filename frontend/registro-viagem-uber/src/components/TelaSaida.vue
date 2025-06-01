@@ -1,9 +1,15 @@
 <script setup>
-import {computed, ref} from 'vue'
+import {computed, ref, inject} from 'vue'
 
 const descGasto = ref('');
 const valorSaida = ref(0);
+const tipoGasto = ref('alimentacao')
 
+const cadastrarSaida = ()=>{
+  if(descGasto.value !== '' && valorSaida.value !== 0) {
+    alert("cadastrado com sucesso")
+  }
+}
 
 
 </script>
@@ -33,9 +39,9 @@ const valorSaida = ref(0);
       <div class="card">
         <label for="tipoGasto">Tipo de Gasto</label>
         <select v-model="tipoGasto" id="tipoGasto">
-          <option  :value="alimentação" selected>Alimentação  </option>
-          <option  :value="etanol">Combustivel Etanol  </option>
-          <option :value="gasolina">Combustivel Gasolina  </option>
+          <option value="alimentacao">Alimentação  </option>
+          <option value="Etanol">Combustivel Etanol  </option>
+          <option value="Gasolina">Combustivel Gasolina  </option>
         </select>
       </div>
 
