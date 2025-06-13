@@ -26,6 +26,8 @@ const ganhoPorCorrida = computed(()=>{
 })
 
 
+
+
 </script>
 
 <template>

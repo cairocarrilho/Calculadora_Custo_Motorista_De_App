@@ -5,13 +5,23 @@ import Calculos from "./components/Calculos.vue";
 
 import { ref, computed,provide  } from 'vue'
 
+//Entrada
 const ganhoValor = ref(0);
 const kmRodado = ref(0);
 const horasTrabalhadas = ref(0);
 const qtdeViagem = ref(0);
 const resultadosEntrada = ref(false);
 
+
+
+
+// Saida
 const valorSaida = ref(0);
+const tipoGasto = ref('alimentacao')
+const dataSaida =  ref('')
+const itensDeSaida = ref([])
+
+
 
 // Disponibiliza os dados para os filhos
 provide('dadosEntrada', {
@@ -23,8 +33,12 @@ provide('dadosEntrada', {
 })
 
 provide('dadosSaida', {
+  tipoGasto,
   valorSaida,
+  dataSaida,
+  itensDeSaida
 })
+
 
 
 // Estado de qual tipo está selecionado
@@ -39,7 +53,7 @@ const componenteAtual = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div class="titulo">
     <h1>Calculadora de Custo</h1>
     <h3>Motorista de app</h3>
   </div>
@@ -68,6 +82,10 @@ const componenteAtual = computed(() => {
 </template>
 
 <style scoped>
+.titulo{
+  text-align: center;
+}
+
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -75,6 +93,7 @@ const componenteAtual = computed(() => {
 }
 
 .botoes {
+  margin: auto;
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
