@@ -1,6 +1,7 @@
 <script setup>
 
-import { inject } from 'vue'
+import {inject, ref} from 'vue'
+
 
 
 const {
@@ -8,20 +9,25 @@ const {
   kmRodado,
   horasTrabalhadas,
   qtdeViagem,
-  resultadosEntrada
+  resultadosEntrada,
+  cadastroRealizado
 } = inject('dadosEntrada') // injeto eles do elementos pai para ser usado
+
+
 
 
 const cadastrarEntrada =()=>{
 
   if(ganhoValor.value !== 0 && kmRodado.value !== 0 && horasTrabalhadas.value !== 0 && qtdeViagem.value!== 0) {
     resultadosEntrada.value = true;
+    cadastroRealizado.value = true
   }
+
 
 }
 
 
-
+console.log('Cadastro realizado:', cadastroRealizado)
 </script>
 
 <template>

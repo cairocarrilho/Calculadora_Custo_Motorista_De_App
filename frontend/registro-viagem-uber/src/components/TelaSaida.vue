@@ -1,44 +1,46 @@
 <script setup>
-import {computed, ref, inject} from 'vue'
+import {inject, ref} from 'vue'
+
+
 
 const {
   tipoGasto,
   valorSaida,
   dataSaida,
-  itensDeSaida
+  itensDeSaida,
+
 } = inject('dadosSaida')
 
-
-// const descGasto = ref('')
-// const tipoGasto = ref('alimentacao')
-// const valorSaida = ref(0)
-// const dataSaida = ref('')
+const saidasTemporarias = ref([
+  { dataSaida: '', valorSaida: 0, tipoGasto: 'alimentacao' }
+])
 
 
-
-const totalSaidas = computed(() => {
-  return itensDeSaida.value.reduce((soma, item) => soma + Number(item.valor), 0)
-})
-
+const cadastrarOutraSaida = () =>{
+  saidasTemporarias.value.push({
+    data: dataSaida,
+    valor: valorSaida,
+    tipo: tipoGasto
+  })
+}
 const cadastrarSaida = ()=>{
 
-  if(dataSaida.value === '' && valorSaida.value === 0) {
-    if (!confirm("Confirma salvar com valores zerados?")) return
+  for (const saida of saidasTemporarias.value) {
+    if (saida.data === '' && saida.valor === 0) {
+      if (!confirm("Confirma salvar uma saída com valores zerados?")) return
+    }
+
+    itensDeSaida.value.push({
+      data: saida.data,
+      valor: saida.valor,
+      tipo: saida.tipo
+    })
   }
 
-  // Adiciona no array
-  itensDeSaida.value.push({
-    data: dataSaida.value,
-    valor: valorSaida.value,
-    tipo: tipoGasto.value
-  })
-
-  // Limpa o formulário
-
-  valorSaida.value = 0
-  tipoGasto.value = 'alimentacao'
-  dataSaida.value = ''
-
+  // Limpa os campos após cadastrar
+  saidasTemporarias.value = [
+    { data: '', valor: 0, tipo: 'alimentacao' }
+  ]
 
 }
 
@@ -47,56 +49,59 @@ const cadastrarSaida = ()=>{
 
 <template>
 
-  <div class="container">
-    <form @submit.prevent="cadastrarSaida">
-      <h3>Saida</h3>
 
-      <div class="card">
-        <label>Data do Lançamento</label>
-        <input type="date" v-model="dataSaida">
-      </div>
+    <div class="container">
+      <form @submit.prevent="cadastrarSaida">
+        <h3>Saída</h3>
 
+        <div
+            class="card"
+            v-for="(saida, index) in saidasTemporarias"
+            :key="index"
+        >
+          <label>Data do Lançamento</label>
+          <input type="date" v-model="saida.data" />
 
-      <div class="card">
-        <label>Valor da Saida</label>
-        <input type="number"
-               v-model="valorSaida"
-               placeholder="Informe o valor da Saida"
-               inputmode="decimal"
-               step="0.01"
-        />
+          <label>Valor da Saída</label>
+          <input
+              type="number"
+              v-model="saida.valor"
+              placeholder="Informe o valor da Saída"
+              inputmode="decimal"
+              step="0.01"
+          />
+
+          <label for="tipoGasto">Tipo de Gasto</label>
+          <select v-model="saida.tipo">
+            <option value="alimentacao">Alimentação</option>
+            <option value="Etanol">Combustível Etanol</option>
+            <option value="Gasolina">Combustível Gasolina</option>
+          </select>
+
+          <hr />
         </div>
-        <!--inputmode="decimal" ativa o teclado numérico com ponto (em celulares) Em navegadores em português (pt-BR), usuário pode digitar com vírgula,e o Vue converterá corretamente se o valor for válido -->
-        <!-- step="0.01"  permite valores decimais como 25.50 -->
 
-      <div class="card">
-        <label for="tipoGasto">Tipo de Gasto</label>
-        <select v-model="tipoGasto" id="tipoGasto">
-          <option value="alimentacao">Alimentação</option>
-          <option value="Etanol">Combustivel Etanol</option>
-          <option value="Gasolina">Combustivel Gasolina</option>
-        </select>
-      </div>
+        <button type="button" @click="cadastrarOutraSaida" class="azul">
+          Adicionar outra saída
+        </button>
 
-
-      <input type="submit" value="Cadastrar">
-
-    </form>
-
-    <div v-if="itensDeSaida.length > 0">
-      <h4>Gastos cadastrados:</h4>
-      <ul>
-        <li v-for="(item, index) in itensDeSaida" :key="index">
-          {{ item.data }} -  : R$ {{ item.valor }} ({{ item.tipo }})
-        </li>
-      </ul>
-
-      <p><strong>Total de Gastos:</strong> R$ {{ totalSaidas.toFixed(2) }}</p>
+        <input type="submit" value="Cadastrar" />
+      </form>
     </div>
-  </div>
-
 </template>
 
 <style scoped>
+.azul{
+
+  width: 100%;
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  gap:10px;
+
+}
 
 </style>

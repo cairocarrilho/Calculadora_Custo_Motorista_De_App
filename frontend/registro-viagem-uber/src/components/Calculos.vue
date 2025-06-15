@@ -10,9 +10,6 @@ const {
   resultadosEntrada
 } = inject('dadosEntrada')
 
-
-
-
 const calculoKm =  computed(()=>{
   return (ganhoValor.value / kmRodado.value).toFixed(2)
 })
