@@ -10,24 +10,22 @@ const {
   horasTrabalhadas,
   qtdeViagem,
   resultadosEntrada,
-  cadastroRealizado
+
 } = inject('dadosEntrada') // injeto eles do elementos pai para ser usado
+
+const saldo = inject('saldo')
 
 
 
 
 const cadastrarEntrada =()=>{
-
-  if(ganhoValor.value !== 0 && kmRodado.value !== 0 && horasTrabalhadas.value !== 0 && qtdeViagem.value!== 0) {
+  if(ganhoValor.value !== 0 && kmRodado.value !== 0 && horasTrabalhadas.value !== 0 && qtdeViagem.value !== 0) {
     resultadosEntrada.value = true;
-    cadastroRealizado.value = true
   }
-
-
 }
 
 
-console.log('Cadastro realizado:', cadastroRealizado)
+
 </script>
 
 <template>
@@ -71,6 +69,13 @@ console.log('Cadastro realizado:', cadastroRealizado)
 </template>
 
 <style >
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
 .container{
   display: flex;
   flex-direction: column;

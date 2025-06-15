@@ -1,7 +1,7 @@
 <script setup >
 import TelaEntrada from './components/TelaEntrada.vue'
 import TelaSaida from "./components/TelaSaida.vue";
-import Calculos from "./components/Calculos.vue";
+import Calculos from "./views/Calculos.vue";
 import CardSaida from "./views/CardSaida.vue";
 import CardSaldo from "./views/CardSaldo.vue";
 
@@ -15,7 +15,7 @@ const kmRodado = ref(0);
 const horasTrabalhadas = ref(0);
 const qtdeViagem = ref(0);
 const resultadosEntrada = ref(false);
-const cadastroRealizado = ref(false)
+
 
 // Saida
 const valorSaida = ref(0);
@@ -23,15 +23,14 @@ const tipoGasto = ref('alimentacao')
 const dataSaida =  ref('')
 const itensDeSaida = ref([])
 
+
 const totalSaidas = computed(() => {
   return itensDeSaida.value.reduce((soma, item) => soma + Number(item.valor), 0)
 })
 
-watch(cadastroRealizado, (newVal) => {
-  console.log('cadastroRealizado mudou para:', newVal)
+const resultadoSub = computed(() => {
+  return ganhoValor.value - totalSaidas.value
 })
-
-
 
 
 // Disponibiliza os dados para os filhos
@@ -41,7 +40,7 @@ provide('dadosEntrada', {
   horasTrabalhadas,
   qtdeViagem,
   resultadosEntrada,
-  cadastroRealizado
+
 })
 
 provide('dadosSaida', {
@@ -53,6 +52,7 @@ provide('dadosSaida', {
 
 })
 
+provide('saldo', resultadoSub)
 
 
 // Estado de qual tipo está selecionado
@@ -67,6 +67,8 @@ const componenteAtual = computed(() => {
 </script>
 
 <template>
+  <div class="containerPrincipal">
+
   <div class="titulo">
     <h1>Calculadora de Custo</h1>
     <h3>Motorista de app</h3>
@@ -91,8 +93,7 @@ const componenteAtual = computed(() => {
     </div>
     <div class="cardResultados">
       <CardSaida  v-if="totalSaidas > 0" />
-      <CardSaldo v-if=" cadastroRealizado" />
-
+      <CardSaldo v-if=" resultadosEntrada" />
     </div>
 
 
@@ -102,10 +103,25 @@ const componenteAtual = computed(() => {
 
   </div>
   <Calculos v-if="tipoSelecionado === 'entrada'"/>
-
+  </div>
 </template>
 
 <style scoped>
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.containerPrincipal{
+  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+  height: 100vh;
+  width: 100%;
+}
 .titulo{
   text-align: center;
 }

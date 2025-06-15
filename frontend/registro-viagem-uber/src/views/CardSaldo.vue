@@ -1,27 +1,26 @@
 <script setup>
-import {computed, inject} from 'vue'
+import { inject } from 'vue'
 
-const { ganhoValor} = inject('dadosEntrada')
-
-const {totalSaidas} = inject('dadosSaida')
-
-
-const saldo = computed(() => {
-  return ganhoValor.value - totalSaidas.value
-})
-
-
-
+const saldo = inject('saldo')
+const resultadosEntrada = inject('dadosEntrada')
 </script>
 
 <template>
-  <div class="card" >
+  <div class="card" v-if="resultadosEntrada">
     <h4>Saldo</h4>
-    <p>R$ {{ saldo.toFixed(2) }}</p>
+    <p>R$ {{ saldo}}</p>
   </div>
 </template>
 
 <style scoped>
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
 .card {
   width: 115px;
   height: 150px;
@@ -31,6 +30,5 @@ const saldo = computed(() => {
   margin-top: 20px;
   text-align: center;
   font-weight: bolder;
-
 }
 </style>

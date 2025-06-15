@@ -10,16 +10,19 @@ const {
   resultadosEntrada
 } = inject('dadosEntrada')
 
+const resultadoSub = inject('saldo')
+
+
 const calculoKm =  computed(()=>{
-  return (ganhoValor.value / kmRodado.value).toFixed(2)
+  return (resultadoSub.value / kmRodado.value).toFixed(2)
 })
 
 const ganhoPorHora = computed(()=>{
-  return (ganhoValor.value / horasTrabalhadas.value).toFixed(2)
+  return (resultadoSub.value / horasTrabalhadas.value).toFixed(2)
 })
 
 const ganhoPorCorrida = computed(()=>{
-  return ganhoValor.value === 0 ? 0 : (ganhoValor.value / qtdeViagem.value).toFixed(2)
+  return (resultadoSub.value / qtdeViagem.value).toFixed(2)
 })
 
 
@@ -31,9 +34,9 @@ const ganhoPorCorrida = computed(()=>{
 
   <div class="calculos-container">
     <div v-if="resultadosEntrada" class="card_resultado">
-      <div class="result">Ganho por KM: R$ {{ calculoKm }}</div>
+      <div class="result">Ganho por KM: R$ {{ calculoKm}}</div>
       <div class="result">Ganho por Corrida:<br> R$ {{ ganhoPorCorrida }}</div>
-      <div class="result">Ganho por Hora:<br> R$ {{ ganhoPorHora }}</div>
+      <div class="result">Ganho por Hora:<br> R$ {{ ganhoPorHora}}</div>
     </div>
 
   </div>
