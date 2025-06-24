@@ -109,57 +109,100 @@ const componenteAtual = computed(() => {
 <style scoped>
 
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
 
-
-.containerPrincipal{
-  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
-  height: 100vh;
+.containerPrincipal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
   width: 100%;
+  padding: 2rem 0;
 }
-.titulo{
+
+.titulo {
   text-align: center;
+  color: white;
+  padding: 2rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.titulo h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.titulo h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.9;
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .botoes {
-  margin: auto;
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background: #f0f0f0;
-  transition: background 0.3s;
+  border: none;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button.ativo {
-  background-color: #3498db;
+  background: #4c6ef5;
   color: white;
-  border-color: #2980b9;
+  box-shadow: 0 4px 6px rgba(76, 110, 245, 0.2);
 }
 
-.cardResultados{
+.cardResultados {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 1.5rem;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
 
+  .titulo h1 {
+    font-size: 2rem;
+  }
+
+  .cardResultados {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 </style>

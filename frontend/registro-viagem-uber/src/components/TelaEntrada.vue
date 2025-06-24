@@ -70,54 +70,144 @@ const cadastrarEntrada =()=>{
 
 <style >
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
-.container{
+.container {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin: auto;
-  padding: 20px;
-  gap: 10px;
-  margin-top: 15px
-}
-.container .card{
-  display: flex;
-  margin-top: 10px;
-}
-
-.card{
-  padding: 10px;
-  border: 1px solid blue;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 5px;
-}
-input, select{
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid green;
-}
-
-form{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-form input[type='submit']{
   width: 100%;
-  background-color: green;
+  max-width: 600px;
+  margin: auto;
+  padding: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+form h3 {
+  color: #2b3442;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+form h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4c6ef5, #6e8ffa);
+  border-radius: 2px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.card:focus-within {
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.1);
+}
+
+label {
+  color: #495057;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #495057;
+  transition: all 0.3s ease;
+  width: 90%;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.1);
+}
+
+input[type="date"] {
+  color: #495057;
+  font-family: inherit;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::placeholder {
+  color: #adb5bd;
+}
+
+input[type="submit"] {
+  background: linear-gradient(135deg, #40c057 0%, #2f9e44 100%);
   color: white;
+  font-weight: 600;
+  padding: 1rem;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  gap:10px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px rgba(64, 192, 87, 0.2);
+  width: 100%;
+}
+
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(64, 192, 87, 0.3);
+}
+
+input[type="submit"]:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  form {
+    padding: 1.5rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+  }
+
+  input {
+    font-size: 16px; /* Previne zoom em dispositivos iOS */
+  }
 }
 
 
