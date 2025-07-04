@@ -28,6 +28,8 @@ const totalSaidas = computed(() => {
   return itensDeSaida.value.reduce((soma, item) => soma + Number(item.valor), 0)
 })
 
+
+
 const resultadoSub = computed(() => {
   return ganhoValor.value - totalSaidas.value
 })

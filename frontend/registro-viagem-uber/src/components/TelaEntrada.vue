@@ -1,7 +1,16 @@
 <script setup>
 
-import {inject, ref} from 'vue'
+import {inject, ref, watch} from 'vue'
 
+// modelo original
+const horasString = ref('00:00')
+
+
+// converte horas:minutos em número decimal (ex: '7:30' => 7.5)
+watch(horasString, (novoValor) => {
+  const [horas, minutos] = novoValor.split(':').map(Number)
+  horasTrabalhadas.value = horas + minutos / 60
+})
 
 
 const {
@@ -12,8 +21,6 @@ const {
   resultadosEntrada,
 
 } = inject('dadosEntrada') // injeto eles do elementos pai para ser usado
-
-const saldo = inject('saldo')
 
 
 
@@ -40,23 +47,44 @@ const cadastrarEntrada =()=>{
 
     <div class="card">
         <label>Ganho do Dia</label>
-        <input type="number" v-model="ganhoValor" placeholder="Informe o valor do ganho" >
+        <input type="number"
+               v-model="ganhoValor"
+               placeholder="Informe o valor do ganho"
+               required
+               step="0.01"
+               inputmode="decimal"
+        >
     </div>
 
     <div class="card">
       <label>Km rodado</label>
-      <input type="number" v-model="kmRodado" placeholder="Informe o KM rodado">
+      <input type="number"
+             v-model="kmRodado"
+             placeholder="Informe o KM rodado"
+             required
+             step="0.01"
+             inputmode="decimal"
+      >
     </div>
 
 
     <div class="card">
       <label>Horas Trabalhadas</label>
-      <input type="number"  v-model="horasTrabalhadas" placeholder="Informe as horas trabalhadas ">
+      <input type="time"
+             step="60"
+             v-model="horasString"
+             placeholder="Informe as horas trabalhadas"
+             required
+      >
     </div>
 
       <div class="card">
         <label>Quantidade de Viagens</label>
-        <input type="number"  v-model="qtdeViagem" placeholder="Informe quantas viagem foram feitas">
+        <input type="number"
+               v-model="qtdeViagem"
+               placeholder="Informe quantas viagem foram feitas"
+               required
+        >
       </div>
 
       <input type="submit" value="Cadastrar" />

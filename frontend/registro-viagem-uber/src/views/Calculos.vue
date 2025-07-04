@@ -11,10 +11,11 @@ const {
 } = inject('dadosEntrada')
 
 const resultadoSub = inject('saldo')
+const {totalSaidas} = inject('dadosSaida')
 
 
 const calculoKm =  computed(()=>{
-  return (resultadoSub.value / kmRodado.value).toFixed(2)
+  return (ganhoValor.value / kmRodado.value).toFixed(2)
 })
 
 const ganhoPorHora = computed(()=>{
@@ -25,6 +26,14 @@ const ganhoPorCorrida = computed(()=>{
   return (resultadoSub.value / qtdeViagem.value).toFixed(2)
 })
 
+const custoPorKm = computed(()=>{
+  return (totalSaidas.value / kmRodado.value).toFixed(2)
+})
+
+const lucroPorKM = computed(()=>{
+  return (resultadoSub.value / kmRodado.value).toFixed(2)
+})
+
 
 
 
@@ -32,7 +41,7 @@ const ganhoPorCorrida = computed(()=>{
 
 <template>
   <div class="calculos-container">
-    <div v-if="resultadosEntrada" class="card_resultado">
+    <div v-if="resultadosEntrada" class="card_resultado" key="0">
       <div class="result">
         <span>Ganho por KM</span>
         <span>R$ {{ calculoKm }}</span>
@@ -45,6 +54,15 @@ const ganhoPorCorrida = computed(()=>{
         <span>Ganho por Hora</span>
         <span>R$ {{ ganhoPorHora }}</span>
       </div>
+      <div class="result">
+        <span>Custo por KM</span>
+        <span>R$ {{ custoPorKm }}</span>
+      </div>
+      <div class="result">
+        <span>Lucro por KM</span>
+        <span>R$ {{ lucroPorKM }}</span>
+      </div>
+
     </div>
   </div>
 
