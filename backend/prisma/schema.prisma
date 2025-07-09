@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma" - isso faz com que crie o @prisma/client fora da pasta node modules
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model entradas {
+  id                String   @id @db.Uuid
+  data              DateTime @db.Date
+  ganho             Decimal  @db.Decimal(10, 2)
+  km_rodado         Decimal  @db.Decimal(10, 2)
+  horas_trabalhadas Decimal  @db.Decimal(5, 2)
+  qtde_viagem       Int?
+  saidas            saidas[]
+}
+
+model saidas {
+  id          String   @id @db.Uuid
+  entrada_id  String   @db.Uuid
+  data        DateTime @db.Date
+  tipo_gastoo String   @db.VarChar(50)
+  valor       Decimal  @db.Decimal(10, 2)
+  entradas    entradas @relation(fields: [entrada_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
