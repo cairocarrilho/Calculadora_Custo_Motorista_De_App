@@ -9,7 +9,7 @@ datasource db {
 }
 
 model entradas {
-  id                String   @id @db.Uuid
+  id                String   @id @default(uuid()) @db.Uuid
   data              DateTime @db.Date
   ganho             Decimal  @db.Decimal(10, 2)
   km_rodado         Decimal  @db.Decimal(10, 2)
@@ -19,7 +19,7 @@ model entradas {
 }
 
 model saidas {
-  id          String   @id @db.Uuid
+  id          String   @id @default(uuid()) @db.Uuid
   entrada_id  String   @db.Uuid
   data        DateTime @db.Date
   tipo_gastoo String   @db.VarChar(50)
