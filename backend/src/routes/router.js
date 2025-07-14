@@ -5,6 +5,7 @@ const router = Router();
 
 
 router.use("/entrada",routerEntrada)
+router.use("/alterar", routerEntrada)
 
 
 
