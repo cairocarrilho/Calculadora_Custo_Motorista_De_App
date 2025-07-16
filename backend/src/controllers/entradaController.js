@@ -1,4 +1,4 @@
-import {criarEntradaGanhos, listarEntradas,alterarEntrada} from '../services/entradaServices.js'
+import {criarEntradaGanhos, listarEntradas, alterarEntrada, deletarEntrada} from '../services/entradaServices.js'
 
 export class Entrada{
    async criandoEntradas (req, res){
@@ -32,4 +32,16 @@ export class Entrada{
             res.status(500).json({ error: 'Erro ao alterar Entrada'})
         }
    }
-}
+
+   async deletandoEntrada (req, res){
+
+        try{
+            const deletarGanhos = await deletarEntrada(req.params.id)
+            res.status(200).json(deletarGanhos)
+        } catch(err){
+            console.error(err)
+            res.status(500).json({ error: 'Erro ao deletar Entrada'})
+        }
+   }
+};
+
